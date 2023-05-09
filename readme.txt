@@ -6,3 +6,4 @@ Creating a new branch is quick and simple.
 Git test merge with no-ff.
 Git test secondly  merge with no-ff.
 Git test stash.
+git test thirdly no-ff.

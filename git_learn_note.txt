@@ -92,7 +92,7 @@ index 46d49bf..9247db6 100644
       --graph
 
 2.6.2 在一行中显示提交信息：
-      使用 git log --oneline 命令可以将每个提交的信息压缩到一行中，显示较短的哈希值和提交信息。
+      使用  git log --oneline 命令可以将每个提交的信息压缩到一行中，显示较短的哈希值和提交信息。
       示例：git log --oneline
 
 2.6.3 显示提交中的更改：
@@ -104,15 +104,15 @@ index 46d49bf..9247db6 100644
       示例：git log -3
 
 2.6.5 搜索特定作者的提交：
-      使用 git log --author="作者名称" 命令可以搜索特定作者的提交。
+      使用  git log --author="作者名称" 命令可以搜索特定作者的提交。
       示例：git log --author="John Doe"
 
 2.6.6 根据提交信息搜索提交：
-      使用 git log --grep="搜索词" 命令可以根据提交信息中的关键词搜索提交。
+      使用  git log --grep="搜索词" 命令可以根据提交信息中的关键词搜索提交。
       示例：git log --grep="bug fix"
 
 2.6.7 显示特定时间范围内的提交：
-      使用 git log --since="时间" 和 git log --until="时间" 命令可以查看特定时间范围内的提交。时间可以是日期（例如 "2021-01-01"）或相对时间（例如 "2 weeks ago"）。
+      使用  看咯·2git log --since="时间" 和 git log --until="时间" 命令可以查看特定时间范围内的提交。时间可以是日期（例如 "2021-01-01"）或相对时间（例如 "2 weeks ago"）。
       示例：git log --since="2021-01-01"
       示例：git log --since="2 weeks ago" --until="3 days ago"
 
@@ -211,6 +211,12 @@ index 46d49bf..9247db6 100644
       //即 git push <远程名> <分支名>，这就是 git push origin master 的来源。
       //而 "-u" 选项是 "--set-upstream" 的简写，用于设置推送关系。
       //使用这个选项后，以后就可以直接使用 git push 和 git pull 命令进行推送和拉取操作，而无需再指定远程仓库和分支名。
+
+      git remote add gitee   git@gitee.com:liaoxuefeng/learngit.git
+      git remote add github git@github.com:michaelliao/learngit.git
+      git remote rm gitee
+      git remote remove github
+
   4.7 远程库克隆
       git clone git@github.com:yourgithub/repo.git
       //随便找个目录克隆远程库的内容，
@@ -263,8 +269,10 @@ index 46d49bf..9247db6 100644
   提交所在的分支。
   HEAD 表示当前所在的分支为 master 分支，
   origin/master 和 dev 表示这个提交还分别被 origin/master 分支和 dev 分支所引用。
-  secondly remove test.txt: 提交的描述信息，用于说明本次提交所做的修改或变更。在这个例子中，本次提交是删除了一个名为 test.txt 的文件。
-  这些信息通常由 Git 自动为您生成，您可以使用 git log 命令来查看提交历史和提交信息。
+  secondly remove test.txt: 提交的描述信息，用于说明本次提交所做的修改或变更。
+  在这个例子中，本次提交是删除了一个名为 test.txt 的文件。
+  这些信息通常由 Git 自动为您生成，
+  您可以使用 git log 命令来查看提交历史和提交信息。
   这些信息可以帮助您了解代码库的演化历史、查找问题和跟踪代码变更。
 
 5.2 解决冲突
@@ -391,10 +399,7 @@ git branch -vv
   git push origin --tags推送全部未推送过的本地标签；
   git push origin :refs/tags/<tagname>删除远程标签，
 
-  git remote add gitee git@gitee.com:liaoxuefeng/learngit.git
-  git remote add github git@github.com:michaelliao/learngit.git
-  git remote rm gitee
-  git remote remove github
+  
 7 自定义Git
   7.1 配置颜色：git config --global color.ui true
   7.2 忽略文件：不需要从头写.gitignore文件，GitHub已经为我们准备了各种配置文件，只需要组合一下就可以使用了。
@@ -579,7 +584,109 @@ warning: You appear to have cloned an empty repository.
 可以在服务器端编写一系列脚本来控制提交等操作，
 达到权限控制的目的。Gitolite就是这个工具。
 
-8.4 小结
+8.4 Git支持的钩子（hook）是什么？
+8.4.1 钩子的定义
+  Git 钩子（hook）是一些在特定事件发生时会自动执行的脚本。
+  它们是 Git 的一种强大的自定义和自动化工具，
+  可以用于各种任务，如风格检查、自动测试、通知、以及其他类型的自动化。
+  Git 支持多种类型的钩子，每种类型都与特定的事件关联。
+  以下是一些 Git 支持的钩子类型：
+  pre-commit: 
+  这个钩子在执行 git commit 命令，
+  但在用户输入提交信息之前运行。
+  如果此钩子脚本退出时返回非零值，
+  Git 将中止提交。
+
+  prepare-commit-msg: 
+  这个钩子在用户编辑提交信息，
+  但在提交信息默认内容（如模板、合并信息等）被加载之前运行。
+
+  commit-msg: 
+  这个钩子在用户编辑完提交信息，
+  但在提交被创建之前运行。
+  如果此钩子脚本退出时返回非零值，
+  Git 将中止提交。
+
+  pre-rebase: 
+  这个钩子在 git rebase 命令执行之前运行。
+  如果此钩子脚本退出时返回非零值，
+  Git 将中止 rebase 操作。
+
+  post-checkout: 
+  这个钩子在 git checkout 或 
+  git switch 命令成功执行后运行。
+
+  post-merge: 
+  这个钩子在 git merge 命令成功执行后运行。
+
+  pre-push: 
+  这个钩子在 git push 命令执行之前运行。
+  它可以用于检查即将被推送的提交。
+
+这些都是在本地仓库中使用的钩子。
+如果你使用了一个 Git 服务器，
+如 GitLab 或 GitHub，
+那么你还可以使用一些服务器端的钩子，
+例如 pre-receive、update 和 post-receive。
+要使用钩子，你需要在你的 Git 仓库的 
+.git/hooks 目录下创建一个对应名称的文件，
+并且这个文件需要具有可执行权限。
+这个文件可以是任何类型的脚本，
+比如 shell 脚本、Python 脚本等。
+只要你的系统可以执行这个脚本，
+Git 就可以使用它作为钩子。
+
+8.4.2 钩子文件的名称
+  Git 钩子的文件名是固定的，
+  必须对应 Git 钩子的事件类型。
+  比如，如果你想创建一个在提交前运行的钩子，
+  那么你的钩子文件必须叫做 `pre-commit`。
+  这些钩子文件应该位于你的 Git 仓库的 
+  `.git/hooks` 目录下。
+  在一个新建的 Git 仓库中，
+  `.git/hooks` 目录下通常会有一些样例钩子文件，
+  比如 `pre-commit.sample`、`pre-push.sample` 等等。
+  这些都是示例脚本，你可以根据需要修改它们，
+  然后去掉 `.sample` 后缀使其生效。
+
+所以，对于钩子的文件名，你不能随意命名，
+它必须和 Git 的钩子事件类型相对应。
+8.4.3 示例
+  举一个使用 pre-commit 钩子的简单例子。
+  我们将创建一个 pre-commit 钩子，
+  它的功能是检查项目中是否有任何文件
+  以 .tmp 结尾，如果有，就阻止提交。
+
+首先，我们需要在 .git/hooks 目录下
+创建一个名为 pre-commit 的文件：
+touch .git/hooks/pre-commit
+然后，我们需要给这个文件添加可执行权限：
+chmod +x .git/hooks/pre-commit
+接下来，我们编辑这个文件，添加以下内容：
+#!/bin/sh
+if git diff --cached --name-only | grep '.tmp'
+then
+  echo "Error: Attempt to commit a temporary file"
+  exit 1
+fi
+
+这是一个简单的 shell 脚本。
+它首先获取所有已暂存但未提交的文件的列表，
+然后用 grep 命令查找任何以 .tmp 结尾的文件。
+如果 grep 命令找到了匹配项，那么它会返回一个
+非零的退出状态，这会导致脚本结束并
+返回一个错误，进而导致 Git 中止提交。
+现在，每次你试图提交一个以 .tmp 结尾的文件时，
+Git 都会拒绝并显示一个错误消息。
+这只是一个例子，实际上你可以使用 Git 钩子
+做很多事情，例如自动运行测试、检查代码格式、
+自动发送通知等等。
+具体取决于你的具体需求和你的创造力。
+
+
+8.5 小结
 搭建Git服务器非常简单，通常10分钟即可完成；
 要方便管理公钥，用Gitosis；
 要像SVN那样变态地控制权限，用Gitolite。
+
+ 

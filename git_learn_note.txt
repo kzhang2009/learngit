@@ -162,6 +162,11 @@ index 46d49bf..9247db6 100644
 4 远程仓库
   4.1 创建SSH Key 
       ssh-keygen -t rsa -C "youremail@example.com"
+    4.1.1 测试 SSH 连接；
+        使用命令 ssh -T git@gitee.com 
+        进行测试，出现 hi... 字样，即连接成功；
+        同样在使用 GIthub 时使用命令 
+        ssh -T git@github.com 即可；
   4.2 Add SSH Key
   4.3 sign in github
   4.4 new repository

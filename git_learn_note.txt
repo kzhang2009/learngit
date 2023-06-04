@@ -374,6 +374,7 @@ git branch -vv
 //那么该信息将显示在方括号中。
 
 
+
 因此，多人协作的工作模式通常是这样：
 首先，可以试图用git push origin <branch-name>推送自己的修改；
 如果推送失败，则因为远程分支比你的本地更新，需要先用git pull试图合并；
@@ -403,7 +404,9 @@ git branch -vv
   git push origin <tagname>推送本地标签；
   git push origin --tags推送全部未推送过的本地标签；
   git push origin :refs/tags/<tagname>删除远程标签，
-
+  切换标签
+	  使用git checkout <tagname>指令即可将git仓库的HEAD指针指向标签所在的提交，如下：
+	  git checkout v1.0
   
 7 自定义Git
   7.1 配置颜色：git config --global color.ui true

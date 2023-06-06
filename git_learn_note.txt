@@ -701,6 +701,13 @@ Git 都会拒绝并显示一个错误消息。
 具体取决于你的具体需求和你的创造力。
 
 
+
+stash：存储临时代码。
+reset --soft：软回溯，回退 commit 的同时保留修改内容。
+cherry-pick：复制 commit。
+revert：撤销 commit 的修改内容。
+reflog：记录了 commit 的历史操作。
+
 8.5 小结
 搭建Git服务器非常简单，通常10分钟即可完成；
 要方便管理公钥，用Gitosis；

@@ -199,6 +199,18 @@ index 46d49bf..9247db6 100644
       //在以后的推送或者拉取时就可以简化命令,
       //git push origin master推送最新修改
       //git push origin master:dev 将本地的master 推送到远程dev分支
+      //git pull <远程主机名> <远程分支名>:<本地分支名>
+      // 如果远程分支是与当前分支合并，则冒号后面的部分可以省略
+      //$ git fetch <远程主机名> //这个命令将某个远程主机的更新全部取回本地
+      //取回更新后，会返回一个FETCH_HEAD ，
+      //指的是某个branch在服务器上的最新状态，
+      //我们可以在本地通过它查看刚取回的更新信息
+      //$ git log -p FETCH_HEAD
+
+      //git pull origin master 相当于下面git fetch和git merge两条指令
+      //git fetch origin master //从远程主机的master分支拉取最新内容 
+      //git merge FETCH_HEAD    //将拉取下来的最新内容合并到当前所在的分支中
+
 
       git push -u origin master：
       //这个命令的主要目的是将本地的更改推送到远程仓库，
@@ -691,6 +703,13 @@ Git 都会拒绝并显示一个错误消息。
 自动发送通知等等。
 具体取决于你的具体需求和你的创造力。
 
+
+
+stash：存储临时代码。
+reset --soft：软回溯，回退 commit 的同时保留修改内容。
+cherry-pick：复制 commit。
+revert：撤销 commit 的修改内容。
+reflog：记录了 commit 的历史操作。
 
 8.5 小结
 搭建Git服务器非常简单，通常10分钟即可完成；

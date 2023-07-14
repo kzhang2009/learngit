@@ -7,4 +7,4 @@ Git test merge with no-ff.
 Git test secondly  merge with no-ff.
 Git test stash.
 git test thirdly no-ff.
-git I am dev.
+git  I am dev.
